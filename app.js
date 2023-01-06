@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
-const routes = require('./routes/metacoinApi');
+const routes = require('./routes/dryadtokenApi');
 const swaggerSpec = require('./swaggerSpec');
 // Swagger UI for express used to serve swagger-ui with output of swagger-jsdoc
 const swaggerUi = require('swagger-ui-express');

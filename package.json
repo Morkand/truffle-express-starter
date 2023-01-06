@@ -1,5 +1,5 @@
 {
-  "name": "truffle-express-starter",
+  "name": "dryadtoken",
   "version": "1.0.0",
   "description": "Node express starter truffle box ",
   "main": "app.js",
@@ -10,13 +10,15 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sharad Gulati",
+  "author": "Carlos Paez",
   "license": "MIT",
   "dependencies": {
+    "@truffle/contract": "^4.6.10",
+    "@truffle/hdwallet-provider": "^2.1.4",
+    "dotenv": "^16.0.3",
     "express": "^4.16.4",
     "swagger-jsdoc": "^3.2.6",
     "swagger-ui-express": "^4.0.2",
-    "truffle-contract": "^4.0.2",
-    "truffle-hdwallet-provider": "^1.0.2"
+    "truffle-contract": "^4.0.2"
   }
 }

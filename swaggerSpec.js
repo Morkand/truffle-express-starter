@@ -16,7 +16,7 @@ const swaggerDefinition = {
 const swaggerOptions = {
     swaggerDefinition: swaggerDefinition, // swagger definition
     apis: [
-      './routes/metacoinApi.js'
+      './routes/dryadtokenApi.js'
     ], // path where API specification are written
   };
   
