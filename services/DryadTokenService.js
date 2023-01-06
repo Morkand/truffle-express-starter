@@ -14,7 +14,7 @@ class DryadTokenService{
         this.DryadToken = truffleContract(dryadtokenContract);
         this.DryadToken.setProvider(this.web3.currentProvider);
     }
-
+    
     /**
      * Get all available accounts
      */
@@ -92,7 +92,6 @@ class DryadTokenService{
 
         try{
             const dryadtoken = await this.DryadToken.deployed();
-            const accounts = await this.web3.eth.getAccounts();
             allowance = await dryadtoken.allowance(owner,spender);
 
         }catch(err){

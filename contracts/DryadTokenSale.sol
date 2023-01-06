@@ -52,7 +52,7 @@ contract DryadTokenSale is PauseControl {
         
         emit Sell(_receiver, _numberOfTokens);
     }
-
+    
     function tokensSold() whenNotpaused public view returns(uint256){
         return properties.tokensSold;
     }
@@ -62,7 +62,7 @@ contract DryadTokenSale is PauseControl {
     }
 
     function icoTokenSupply() whenNotpaused public view returns(uint256){
-        return tokenContract.balanceOf(address(this));
+        return tokenContract.allowance(properties.admin, address(this));
     }
 
     function icoTokenPhase() whenNotpaused public view returns(string memory){
@@ -70,12 +70,8 @@ contract DryadTokenSale is PauseControl {
     }
 
     function endSale() whenNotpaused public onlyRole(_adminico()) {
-        require(tokenContract.transfer(properties.admin,tokenContract.balanceOf(address(this))));
         properties.tokenPrice = 0;
         properties.tokensSold = 0;
         _pauseControl(true);
-    }
-    function calcDecimals(uint256 _value) internal pure returns (uint256){
-        return _value*(10**18);
     }
 }
