@@ -34,7 +34,7 @@ contract DryadToken is PauseControl {
         properties.decimals = _decimals;
         properties.paused = _paused;
         properties.bc = msg.sender;
-        
+        _pauseAdmin(msg.sender);
         if (properties.paused) {
             _pauseControl(properties.paused);
         }
@@ -117,8 +117,8 @@ contract DryadToken is PauseControl {
         address _to,
         uint256 _value
     ) public whenNotpaused returns (bool success) {
-        require(_value <= balanceOf(_from));
-        require(_value <= allowance(_from, msg.sender));
+        require(_value <= balanceOf(_from),"out of balance");
+        require(_value <= allowance(_from, msg.sender),"No Allowance");
         bal[_from] -= _value;
         bal[_to] += _value;
         allow[_from][msg.sender] -= _value;

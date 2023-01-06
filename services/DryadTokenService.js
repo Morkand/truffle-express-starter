@@ -3,7 +3,7 @@ const dryadtokenContract = require('../build/contracts/DryadToken.json');
 const web3Utils = require('../utils/web3Utils');
 
 /**
- * Service class that interfaces with the metacoin api contract
+ * Service class that interfaces with the dryadtoken api contract
  */
 class DryadTokenService{
 
@@ -13,7 +13,6 @@ class DryadTokenService{
         this.GAS_LIMIT = 1000000;
         this.DryadToken = truffleContract(dryadtokenContract);
         this.DryadToken.setProvider(this.web3.currentProvider);
-
     }
 
     /**
@@ -56,6 +55,52 @@ class DryadTokenService{
         }
 
         return web3Utils.delDecimals(balance);
+     
+    }
+
+    /**
+     * Get account approve 
+     * @param {*} account 
+     * @param {*} amount  
+     */
+    async getApprove(account,amount){
+
+        let approve;
+
+        try{
+            const dryadtoken = await this.DryadToken.deployed();
+            const accounts = await this.web3.eth.getAccounts();
+            approve = await dryadtoken.approve(account,web3Utils.calcDecimals(amount),{from:accounts[0],gas:this.GAS_LIMIT});
+
+        }catch(err){
+            console.log(err);
+            approve = err;
+        }
+
+        return approve;
+     
+    }
+
+     /**
+     * Get account allowance 
+     * @param {*} owner 
+     * @param {*} spender  
+     */
+     async getAllowance(owner,spender){
+
+        let allowance;
+
+        try{
+            const dryadtoken = await this.DryadToken.deployed();
+            const accounts = await this.web3.eth.getAccounts();
+            allowance = await dryadtoken.allowance(owner,spender);
+
+        }catch(err){
+            console.log(err);
+            allowance = err;
+        }
+
+        return  web3Utils.delDecimals(allowance);
      
     }
 

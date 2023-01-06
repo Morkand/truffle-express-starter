@@ -24,6 +24,9 @@ contract PauseControl is AccessControl {
     function _pauseAdmin(address _adminPauser) internal{
         _grantRole(_admin(), _adminPauser);
     }
+    function _icoAdmin(address _adminICO) internal{
+        _grantRole(_adminico(), _adminICO);
+    }
 
     function _pauseControl (bool _paused) internal{
         paused = _paused;

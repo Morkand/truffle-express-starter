@@ -28,6 +28,7 @@ contract DryadTokenSale is PauseControl {
         properties.paused = _paused;
         properties.admin= msg.sender;
         _pauseAdmin(msg.sender);
+        _icoAdmin(address(this));
         if (properties.paused) {
             _pauseControl(_paused);
         }
@@ -45,13 +46,11 @@ contract DryadTokenSale is PauseControl {
         return properties.tokenPrice;
     }
 
-    function buyTokens(uint256 _numberOfTokens) whenNotpaused onlyRole(_adminico()) public{
-        _numberOfTokens = calcDecimals(_numberOfTokens);
-        require(tokenContract.balanceOf(address(this))>=_numberOfTokens);
-        require(tokenContract.transfer(msg.sender, _numberOfTokens));
+    function buyTokens(address _receiver, uint256 _numberOfTokens) whenNotpaused public onlyRole(_adminico()){
+        require(tokenContract.transferFrom(properties.admin,_receiver, _numberOfTokens),"No TRANSFER");
         properties.tokensSold += _numberOfTokens;
         
-        emit Sell(msg.sender, _numberOfTokens);
+        emit Sell(_receiver, _numberOfTokens);
     }
 
     function tokensSold() whenNotpaused public view returns(uint256){

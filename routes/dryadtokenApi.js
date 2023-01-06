@@ -5,6 +5,70 @@ const express = require('express');
 const router = express.Router();
 const DryadTokenService = require('../services/DryadTokenService');
 const dryadTokenService = new DryadTokenService();
+const DryadTokenSaleService = require('../services/DryadTokenSaleService');
+const dryadTokenSaleService = new DryadTokenSaleService();
+
+/**
+ * @swagger
+ * /approve:
+ *   post:
+ *     description: Approve spender
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: accountTransfer
+ *         description: Example request {"spender":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","amount":10}
+ *     responses:
+ *       200:
+ *         description: Return transaction hash
+ */
+router.post("/approve", async (req,res) => {
+    const transactionResponse = await dryadTokenService.getApprove(req.body.spender,req.body.amount);
+    res.send(transactionResponse);
+
+});
+/**
+ * @swagger
+ * /allowance:
+ *   post:
+ *     description: Approve spender
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: accountTransfer
+ *         description: Example request {"owner":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","spender":10}
+ *     responses:
+ *       200:
+ *         description: Return transaction hash
+ */
+router.post("/allowance", async (req,res) => {
+    const transactionResponse = await dryadTokenService.getAllowance(req.body.owner,req.body.spender);
+    res.send('allowance:'+transactionResponse);
+
+});
+
+/**
+ * @swagger
+ * /buytokens:
+ *   post:
+ *     description: Buy tokens
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: accountTransfer
+ *         description: Example request {"toAccount":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","amount":10}
+ *     responses:
+ *       200:
+ *         description: Return transaction hash
+ */
+router.post("/buytokens", async (req,res) => {
+    const transactionResponse = await dryadTokenSaleService.buyTokens(req.body.toAccount,req.body.amount);
+    res.send(transactionResponse);
+
+});
 
 /**
  * @swagger
@@ -113,7 +177,7 @@ router.get("/standard", async (req,res) => {
  */
 router.get("/decimals", async (req,res) => {
     const transactionResponse = await dryadTokenService.tokenDecimals();
-    res.send(transactionResponse);
+    res.send('decimals:' +transactionResponse);
 
 });
 
