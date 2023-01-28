@@ -19,7 +19,7 @@ const dryadTokenSaleService = new DryadTokenSaleService();
  *         description: Return transaction hash
  */
 router.post("/buytokens", async (req,res) => {
-  const transactionResponse = await dryadTokenSaleService.buyTokens(req.body.toAccount,req.body.amount);
+  const transactionResponse = await dryadTokenSaleService.buyTokens(req.body);
   res.send(transactionResponse);
 
 });
@@ -118,6 +118,10 @@ router.get("/tokenPhase", async (req,res) => {
   const phase = await dryadTokenSaleService.getICOTokenPhase();
   res.send("Token Phase:"+phase);
 
+});
+router.get("/clients", async (req,res) => {
+  const clients = await dryadTokenSaleService.getClients();
+  res.send({clientes:clients});
 });
 
 

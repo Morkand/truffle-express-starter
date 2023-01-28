@@ -13,10 +13,12 @@
   "author": "Carlos Paez",
   "license": "MIT",
   "dependencies": {
-    "@truffle/contract": "^4.6.10",
+    "@truffle/contract": "^4.3.19",
     "@truffle/hdwallet-provider": "^2.1.4",
     "dotenv": "^16.0.3",
     "express": "^4.16.4",
+    "mongoose": "^6.8.3",
+    "openzeppelin-solidity": "^4.8.1",
     "swagger-jsdoc": "^3.2.6",
     "swagger-ui-express": "^4.0.2",
     "truffle-contract": "^4.0.2"
