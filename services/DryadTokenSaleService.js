@@ -80,13 +80,13 @@ class DryadTokenSaleService {
 
             const dryadtokensale = await this.DryadTokenSale.deployed();
             total = await dryadtokensale.icoTokenSupply();
+            return web3Utils.delDecimals(total);
 
         } catch (err) {
 
             console.log(err);
-            total = err;
+            return error;
         }
-        return web3Utils.delDecimals(total);
     }
 
     /**
@@ -101,13 +101,12 @@ class DryadTokenSaleService {
 
             const dryadtokensale = await this.DryadTokenSale.deployed();
             total = await dryadtokensale.tokenPrice();
+            return web3Utils.delDecimals(total);
 
         } catch (err) {
-
             console.log(err);
-            total = err;
+            return err;
         }
-        return web3Utils.delDecimals(total);
     }
 
     /**
@@ -122,13 +121,13 @@ class DryadTokenSaleService {
 
             const dryadtokensale = await this.DryadTokenSale.deployed();
             sold = await dryadtokensale.tokensSold();
+            return web3Utils.delDecimals(sold);
 
         } catch (err) {
 
             console.log(err);
-            sold = err;
+            return err;
         }
-        return web3Utils.delDecimals(sold);
     }
 
     /**
@@ -143,13 +142,13 @@ class DryadTokenSaleService {
 
             const dryadtokensale = await this.DryadTokenSale.deployed();
             phase = await dryadtokensale.icoTokenPhase();
+            return phase;
 
         } catch (err) {
 
             console.log(err);
-            phase = err;
+            return err;
         }
-        return phase;
     }
     async getClients() {
         let mongo = await mongoUtils.getMongo();

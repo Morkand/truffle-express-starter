@@ -43,18 +43,18 @@ class DryadTokenService{
      */
     async getBalance(account){
 
-        let balance;
-
+        
         try{
+            let balance;
             const dryadtoken = await this.DryadToken.deployed();
             balance = await dryadtoken.balanceOf(account);
+            return web3Utils.delDecimals(balance);
 
         }catch(err){
             console.log(err);
-            balance = err;
+            return err;
         }
 
-        return web3Utils.delDecimals(balance);
      
     }
 
@@ -88,18 +88,18 @@ class DryadTokenService{
      */
      async getAllowance(owner,spender){
 
-        let allowance;
-
-        try{
-            const dryadtoken = await this.DryadToken.deployed();
+         
+         try{
+             let allowance;
+             const dryadtoken = await this.DryadToken.deployed();
             allowance = await dryadtoken.allowance(owner,spender);
+            return  web3Utils.delDecimals(allowance);
 
         }catch(err){
             console.log(err);
-            allowance = err;
+            return err;
         }
 
-        return  web3Utils.delDecimals(allowance);
      
     }
 

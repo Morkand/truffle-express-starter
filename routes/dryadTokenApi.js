@@ -8,7 +8,7 @@ const dryadTokenService = new DryadTokenService();
 
 /**
  * @swagger
- * /approve:
+ * /token/approve:
  *   post:
  *     description: Approve spender
  *     produces:
@@ -28,7 +28,7 @@ router.post("/approve", async (req,res) => {
 });
 /**
  * @swagger
- * /allowance:
+ * /token/allowance:
  *   post:
  *     description: Approve spender
  *     produces:
@@ -49,7 +49,7 @@ router.post("/allowance", async (req,res) => {
 
 /**
  * @swagger
- * /accounts:
+ * /token/accounts:
  *   get:
  *     description: Get Accounts
  *     produces:
@@ -67,7 +67,7 @@ router.get("/accounts", async (req,res) => {
 
 /**
  * @swagger
- * /balance:
+ * /token/balance:
  *   get:
  *     description: Get Balance
  *     produces:
@@ -92,7 +92,7 @@ router.get("/balance", async (req,res) => {
 
 /**
  * @swagger
- * /name:
+ * /token/name:
  *   get:
  *     description: Token Name
  *     produces:
@@ -109,7 +109,7 @@ router.get("/name", async (req,res) => {
 
 /**
  * @swagger
- * /symbol:
+ * /token/symbol:
  *   get:
  *     description: Token Symbol
  *     produces:
@@ -126,7 +126,7 @@ router.get("/symbol", async (req,res) => {
 
 /**
  * @swagger
- * /standard:
+ * /token/standard:
  *   get:
  *     description: Token Standard
  *     produces:
@@ -143,7 +143,7 @@ router.get("/standard", async (req,res) => {
 
 /**
  * @swagger
- * /decimals:
+ * /token/decimals:
  *   get:
  *     description: Token Decimals
  *     produces:
