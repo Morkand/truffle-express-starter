@@ -155,7 +155,7 @@ class DryadTokenSaleService {
         let mongo = await mongoUtils.getMongo();
         let clients = await mongo.collection("clients");
         clients = await clients.find({}).toArray();
-        console.log({cliente:clients});
+        console.log({ cliente: clients });
         return clients;
     };
 }

@@ -5,13 +5,12 @@ var DryadTokenSale = artifacts.require("./DryadTokenSale.sol");
 const TOKENSYMBOL = 'MANO';
 const TOKENNAME = 'MANOLI TOKEN';
 //ICO Properties
-const ICOTOKENPRICE = web3.utils.toBN(String(7) + "0".repeat(TOKENDECIMALS-1));
+const ICOTOKENPRICE = 0.7;
 const ICOPHASE = 'Phase 1';
 const ICOPAUSE = false;
 
 module.exports = function (deployer) {
-  deployer.deploy(DryadToken,TOKENNAME, TOKENSYMBOL).then(function () {
-    //Token price is 0.001 Ether
+  deployer.deploy(DryadToken, TOKENNAME, TOKENSYMBOL).then(function () {
     return deployer.deploy(DryadTokenSale, DryadToken.address, ICOTOKENPRICE, ICOPHASE, ICOPAUSE);
   });
 };
