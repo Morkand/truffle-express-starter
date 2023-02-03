@@ -5,7 +5,7 @@ var DryadTokenSale = artifacts.require("./DryadTokenSale.sol");
 const TOKENSYMBOL = 'MANO';
 const TOKENNAME = 'MANOLI TOKEN';
 //ICO Properties
-const ICOTOKENPRICE = 0.7;
+const ICOTOKENPRICE = web3.utils.toBN(String(7) + "0".repeat(17));
 const ICOPHASE = 'Phase 1';
 const ICOPAUSE = false;
 

@@ -5,7 +5,7 @@ const dryadTokenSaleService = new DryadTokenSaleService();
 
 /**
  * @swagger
- * /buytokens:
+ * /ico/buytokens:
  *   post:
  *     description: Buy tokens
  *     produces:
@@ -26,7 +26,7 @@ router.post("/buytokens", async (req,res) => {
 
 /**
  * @swagger
- * /balance:
+ * /ico/totalSupply:
  *   get:
  *     description: Get Balance
  *     produces:
@@ -50,7 +50,7 @@ router.get("/totalSupply", async (req,res) => {
 
 /**
  * @swagger
- * /balance:
+ * /ico/tokenPrice:
  *   get:
  *     description: Get Balance
  *     produces:
@@ -74,7 +74,7 @@ router.get("/tokenPrice", async (req,res) => {
 
 /**
  * @swagger
- * /balance:
+ * /ico/tokenPrice:
  *   get:
  *     description: Get Balance
  *     produces:
@@ -98,7 +98,7 @@ router.get("/tokenSold", async (req,res) => {
 
 /**
  * @swagger
- * /balance:
+ * /ico/tokenPhase:
  *   get:
  *     description: Get Balance
  *     produces:
