@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.6.0 <0.9.0;
+pragma solidity ^0.8.9;
 
 import "./DryadToken.sol";
-import "./../node_modules/openzeppelin-solidity/contracts/security/Pausable.sol";
-import "./../node_modules/openzeppelin-solidity/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
 contract DryadTokenSale is Pausable, AccessControl {
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
@@ -31,8 +31,6 @@ contract DryadTokenSale is Pausable, AccessControl {
         properties.icoPhase = _icoPhase;
         properties.paused = _paused;
         properties.admin = msg.sender;
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _grantRole(PAUSER_ROLE, msg.sender);
     }
     
     function pause() public onlyRole(PAUSER_ROLE) {

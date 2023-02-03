@@ -14,6 +14,24 @@ class DryadTokenService{
         this.DryadToken = truffleContract(dryadtokenContract);
         this.DryadToken.setProvider(this.web3.currentProvider);
     }
+    /**
+     * Mint Token
+     *  @param {*} amount 
+     */
+    async PostMintSupply(amount){
+        let mint;
+        try{
+            const dryadtoken = await this.DryadToken.deployed();
+            const accounts = await this.web3.eth.getAccounts();
+            mint = await dryadtoken.mint(accounts[0],amount)
+            
+        }catch(err){
+            console.log(err);
+            mint= err;
+        }
+        return mint;
+
+    }
     
     /**
      * Get all available accounts

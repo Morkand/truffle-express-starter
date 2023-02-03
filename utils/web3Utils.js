@@ -13,6 +13,7 @@ module.exports = {
     getWeb3: function () {
 
         const nw = truffleConfig.networks[network];
+        console.log(nw.provider);
         if (nw.provider) {
             return new Web3(nw.provider());
         } else {

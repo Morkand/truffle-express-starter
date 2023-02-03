@@ -158,4 +158,25 @@ router.get("/decimals", async (req,res) => {
 
 });
 
+/**
+ * @swagger
+ * /token/mintSupply:
+ *   post:
+ *     description: Mint tokens
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: mint tokens
+ *         description: Example request {"amount":10}
+ *     responses:
+ *       200:
+ *         description: Return transaction hash
+ */
+router.post("/mintSupply", async (req,res) => {
+    const transactionResponse = await dryadTokenService.PostMintSupply(req.body.amount);
+    res.send('mint:' +transactionResponse);
+
+});
+
 module.exports = router;
