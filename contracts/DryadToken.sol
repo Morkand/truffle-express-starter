@@ -7,14 +7,14 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
 /// @custom:security-contact cpaezpy@gmail.com
-contract DryadToken is ERC20, ERC20Burnable, Pausable, AccessControl {
+contract DryadToken is ERC20, Pausable, AccessControl {
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
     constructor(string memory name,string memory symbol ) ERC20(name, symbol){
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _grantRole(PAUSER_ROLE, msg.sender);
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
+        _grantRole(PAUSER_ROLE, msg.sender);
         _mint(msg.sender,1000000);
     }
 

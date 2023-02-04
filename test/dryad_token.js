@@ -22,10 +22,13 @@ contract("DryadToken", function (accounts) {
       });
   });
 
-  it("allocates the initial supply upon deployment", function () {
+  it("allocates the initial supply upon deployment", async function () {
+
+    this.GAS_LIMIT = 1000000;
     return DryadToken.deployed()
-      .then(function (instance) {
+      .then(async function (instance) {
         tokenInstance = instance;
+        await takenIntence.mint(accounts[0],1000000,{from:accounts[0],gas:this.GAS_LIMIT});
         return tokenInstance.totalSupply();
       })
       .then(function (totalSupply) {

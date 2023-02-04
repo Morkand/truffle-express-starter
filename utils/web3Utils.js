@@ -13,7 +13,6 @@ module.exports = {
     getWeb3: function () {
 
         const nw = truffleConfig.networks[network];
-        console.log(nw.provider);
         if (nw.provider) {
             return new Web3(nw.provider());
         } else {
@@ -23,10 +22,10 @@ module.exports = {
 
     },
     calcDecimals: function (number) {
-        return Web3.utils.toBN(String(number) + "0".repeat(18));
+        return Web3.utils.toWei(number.toString(), 'ether');
     },
     delDecimals: function (number) {
-        return number/(10**18);
+        return  Web3.utils.fromWei(number.toString(), 'ether');
     }
 
 

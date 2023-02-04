@@ -36,7 +36,7 @@ router.post("/approve", async (req,res) => {
  *     parameters:
  *       - in: body
  *         name: accountTransfer
- *         description: Example request {"owner":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","spender":10}
+ *         description: Example request {"owner":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","spender":"0x2AA0c94cA90d9C1a8D2eEEF1203810727feeADe4"}
  *     responses:
  *       200:
  *         description: Return transaction hash
@@ -175,7 +175,7 @@ router.get("/decimals", async (req,res) => {
  */
 router.post("/mintSupply", async (req,res) => {
     const transactionResponse = await dryadTokenService.PostMintSupply(req.body.amount);
-    res.send('mint:' +transactionResponse);
+    res.send(transactionResponse);
 
 });
 

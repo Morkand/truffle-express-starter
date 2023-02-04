@@ -71,7 +71,8 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: "8545",
-      network_id: "*" // match any network id
+      network_id: "*", // match any network id
+      provider: () => new HDWalletProvider(MNEMONIC, "http://localhost:8545"),
     },
     testnet: {
       provider: () => new HDWalletProvider(MNEMONIC, `https://data-seed-prebsc-1-s1.binance.org:8545`),

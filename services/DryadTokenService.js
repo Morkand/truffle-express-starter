@@ -23,7 +23,7 @@ class DryadTokenService{
         try{
             const dryadtoken = await this.DryadToken.deployed();
             const accounts = await this.web3.eth.getAccounts();
-            mint = await dryadtoken.mint(accounts[0],amount)
+            mint = await dryadtoken.mint(accounts[0],web3Utils.calcDecimals(amount),{ from: accounts[0], gas: this.GAS_LIMIT })
             
         }catch(err){
             console.log(err);
