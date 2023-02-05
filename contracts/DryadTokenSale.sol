@@ -26,13 +26,15 @@ contract DryadTokenSale is Pausable, AccessControl {
         string memory _icoPhase,
         bool _paused
     ) {
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(PAUSER_ROLE, msg.sender);
         tokenContract = _tokenContract;
         properties.tokenPrice = _tokenPrice;
         properties.icoPhase = _icoPhase;
         properties.paused = _paused;
         properties.admin = msg.sender;
     }
-    
+
     function pause() public onlyRole(PAUSER_ROLE) {
         _pause();
     }
@@ -50,7 +52,6 @@ contract DryadTokenSale is Pausable, AccessControl {
 
     function ChangeICOTokenPrice(uint256 _tokenPrice)
         public
-        
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
         properties.tokenPrice = _tokenPrice;
@@ -58,6 +59,13 @@ contract DryadTokenSale is Pausable, AccessControl {
 
     function tokenPrice() public view returns (uint256) {
         return properties.tokenPrice;
+    }
+
+    function addIcoTokenSupply(uint256 _amount)
+        public
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        require(tokenContract.approve(address(this), _amount), "No approve");
     }
 
     function buyTokens(address _receiver, uint256 _numberOfTokens)

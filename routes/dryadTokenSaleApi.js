@@ -18,12 +18,31 @@ const dryadTokenSaleService = new DryadTokenSaleService();
  *       200:
  *         description: Return transaction hash
  */
-router.post("/buytokens", async (req,res) => {
+router.post("/buytokens", async (req, res) => {
   const transactionResponse = await dryadTokenSaleService.buyTokens(req.body);
   res.send(transactionResponse);
 
 });
+/**
+ * @swagger
+ * /ico/addIcoTokenSupply:
+ *   post:
+ *     description: Add Token ICO Supply
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: accountTransfer
+ *         description: Example request {"amount":10}
+ *     responses:
+ *       200:
+ *         description: Return transaction hash
+ */
+router.post("/addIcoTokenSupply", async (req, res) => {
+  const transactionResponse = await dryadTokenSaleService.addTokenIcoSupply(req.body.amount);
+  res.send(transactionResponse);
 
+});
 /**
  * @swagger
  * /ico/totalSupply:
@@ -31,20 +50,13 @@ router.post("/buytokens", async (req,res) => {
  *     description: Get Balance
  *     produces:
  *       - application/json
- *     parameters:
- *       - name: account
- *         description: account address
- *         in: query
- *         required: true
- *         schema:
- *          type:string 
  *     responses:
  *       200:
  *         description: Get Account balance
  */
-router.get("/totalSupply", async (req,res) => {
+router.get("/totalSupply", async (req, res) => {
   const totalSypply = await dryadTokenSaleService.getICOTotalSupply();
-  res.send("TotalSupply:"+totalSypply);
+  res.send("TotalSupply:" + totalSypply);
 
 });
 
@@ -66,9 +78,9 @@ router.get("/totalSupply", async (req,res) => {
  *       200:
  *         description: Get Account balance
  */
-router.get("/tokenPrice", async (req,res) => {
+router.get("/tokenPrice", async (req, res) => {
   const price = await dryadTokenSaleService.getTokenPrice();
-  res.send("Price:"+price);
+  res.send("Price:" + price);
 
 });
 
@@ -90,9 +102,9 @@ router.get("/tokenPrice", async (req,res) => {
  *       200:
  *         description: Get Account balance
  */
-router.get("/tokenSold", async (req,res) => {
+router.get("/tokenSold", async (req, res) => {
   const sold = await dryadTokenSaleService.getTokenSold();
-  res.send("Tokens Sold:"+sold);
+  res.send("Tokens Sold:" + sold);
 
 });
 
@@ -114,14 +126,14 @@ router.get("/tokenSold", async (req,res) => {
  *       200:
  *         description: Get Account balance
  */
-router.get("/tokenPhase", async (req,res) => {
+router.get("/tokenPhase", async (req, res) => {
   const phase = await dryadTokenSaleService.getICOTokenPhase();
-  res.send("Token Phase:"+phase);
+  res.send("Token Phase:" + phase);
 
 });
-router.get("/clients", async (req,res) => {
+router.get("/clients", async (req, res) => {
   const clients = await dryadTokenSaleService.getClients();
-  res.send({clientes:clients});
+  res.send({ clientes: clients });
 });
 
 

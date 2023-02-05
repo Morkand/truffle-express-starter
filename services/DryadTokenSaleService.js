@@ -18,6 +18,23 @@ class DryadTokenSaleService {
     }
 
     /**
+     * Buy tokens from one account to another.
+     * Retuens the transaction hash.
+     * 
+     * @param {*} amount 
+     */
+    async addTokenIcoSupply(amount) {
+        try {
+            const dryadtokensale = await this.DryadTokenSale.deployed();
+            const accounts = await this.web3.eth.getAccounts();
+            let supply = await dryadtokensale.addIcoTokenSupply(web3Utils.calcDecimals(amount),{ from: accounts[0], gas: this.GAS_LIMIT });
+            return supply;
+        } catch (err) {
+            console.log(err);
+            return err;
+        }
+    }
+    /**
       * Buy tokens from one account to another.
       * Retuens the transaction hash.
       * 
