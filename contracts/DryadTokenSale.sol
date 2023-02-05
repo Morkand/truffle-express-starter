@@ -19,6 +19,7 @@ contract DryadTokenSale is Pausable, AccessControl {
     DryadToken public tokenContract;
 
     event Sell(address _buyer, uint256 _amount);
+    event AddedTokenSupply(address _minter, uint256 _amount);
 
     constructor(
         DryadToken _tokenContract,
@@ -33,6 +34,7 @@ contract DryadTokenSale is Pausable, AccessControl {
         properties.icoPhase = _icoPhase;
         properties.paused = _paused;
         properties.admin = msg.sender;
+        properties.tokensSold = 0;
     }
 
     function pause() public onlyRole(PAUSER_ROLE) {
@@ -65,7 +67,8 @@ contract DryadTokenSale is Pausable, AccessControl {
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        require(tokenContract.approve(address(this), _amount), "No approve");
+        properties.tokenSupply= _amount;
+        emit AddedTokenSupply(properties.admin, _amount);
     }
 
     function buyTokens(address _receiver, uint256 _numberOfTokens)
@@ -81,7 +84,7 @@ contract DryadTokenSale is Pausable, AccessControl {
             "No TRANSFER"
         );
         properties.tokensSold += _numberOfTokens;
-
+        properties.tokenSupply-=_numberOfTokens;
         emit Sell(_receiver, _numberOfTokens);
     }
 
@@ -94,7 +97,7 @@ contract DryadTokenSale is Pausable, AccessControl {
     }
 
     function icoTokenSupply() public view returns (uint256) {
-        return tokenContract.allowance(properties.admin, address(this));
+        return properties.tokenSupply;
     }
 
     function icoTokenPhase() public view returns (string memory) {

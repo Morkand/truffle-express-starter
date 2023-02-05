@@ -25,6 +25,7 @@ class DryadTokenSaleService {
      */
     async addTokenIcoSupply(amount) {
         try {
+            console.log("amount: "+amount);
             const dryadtokensale = await this.DryadTokenSale.deployed();
             const accounts = await this.web3.eth.getAccounts();
             let supply = await dryadtokensale.addIcoTokenSupply(web3Utils.calcDecimals(amount),{ from: accounts[0], gas: this.GAS_LIMIT });
@@ -42,7 +43,7 @@ class DryadTokenSaleService {
       * @param {*} amount 
       */
     async buyTokens({
-        toAccount,
+        account,
         amount,
         firstName,
         lastName,
@@ -52,16 +53,16 @@ class DryadTokenSaleService {
     }) {
 
         let transactionHash;
-
+        console.log("account: "+account);
         try {
             const dryadtokensale = await this.DryadTokenSale.deployed();
             const accounts = await this.web3.eth.getAccounts();
-            const transaction = await dryadtokensale.buyTokens(toAccount, web3Utils.calcDecimals(amount), { from: accounts[0], gas: this.GAS_LIMIT });
+            const transaction = await dryadtokensale.buyTokens(account, web3Utils.calcDecimals(amount), { from: accounts[0], gas: this.GAS_LIMIT });
             transactionHash = transaction.receipt.transactionHash;
             let transactionInfo = {
                 firstName: firstName,
                 lastName: lastName,
-                address: toAccount,
+                address: account,
                 email: email,
                 dryadQuantity: dryadQuantity,
                 amount: amount,
@@ -97,7 +98,7 @@ class DryadTokenSaleService {
 
             const dryadtokensale = await this.DryadTokenSale.deployed();
             total = await dryadtokensale.icoTokenSupply();
-
+            console.log(total);
         } catch (err) {
 
             console.log(err);

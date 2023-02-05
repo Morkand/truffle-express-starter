@@ -13,7 +13,7 @@ const dryadTokenSaleService = new DryadTokenSaleService();
  *     parameters:
  *       - in: body
  *         name: accountTransfer
- *         description: Example request {"toAccount":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","amount":10}
+ *         description: Example request {"account":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","amount":10}
  *     responses:
  *       200:
  *         description: Return transaction hash
