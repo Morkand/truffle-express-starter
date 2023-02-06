@@ -9,6 +9,7 @@ contract DryadTokenSale is Pausable, AccessControl {
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     struct tokenSaleProperties {
         address admin;
+        address icoContractAddress;
         uint256 tokenPrice;
         uint256 tokensSold;
         uint256 tokenSupply;
@@ -35,6 +36,8 @@ contract DryadTokenSale is Pausable, AccessControl {
         properties.paused = _paused;
         properties.admin = msg.sender;
         properties.tokensSold = 0;
+        properties.tokenSupply = 0;
+        properties.icoContractAddress = address(this);
     }
 
     function pause() public onlyRole(PAUSER_ROLE) {
@@ -63,28 +66,21 @@ contract DryadTokenSale is Pausable, AccessControl {
         return properties.tokenPrice;
     }
 
-    function addIcoTokenSupply(uint256 _amount)
-        public
-        onlyRole(DEFAULT_ADMIN_ROLE)
-    {
-        properties.tokenSupply= _amount;
-        emit AddedTokenSupply(properties.admin, _amount);
+    function addIcoTokenSupply(uint256 _amount) public {
+        properties.tokenSupply += _amount;
     }
 
     function buyTokens(address _receiver, uint256 _numberOfTokens)
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
+        require(properties.tokenSupply >= _numberOfTokens, "No SUPPLY");
         require(
-            tokenContract.transferFrom(
-                properties.admin,
-                _receiver,
-                _numberOfTokens
-            ),
+            tokenContract.transfer(_receiver, _numberOfTokens),
             "No TRANSFER"
         );
         properties.tokensSold += _numberOfTokens;
-        properties.tokenSupply-=_numberOfTokens;
+        properties.tokenSupply -= _numberOfTokens;
         emit Sell(_receiver, _numberOfTokens);
     }
 
@@ -107,5 +103,6 @@ contract DryadTokenSale is Pausable, AccessControl {
     function endSale() public onlyRole(DEFAULT_ADMIN_ROLE) {
         properties.tokenPrice = 0;
         properties.tokensSold = 0;
+        properties.tokenSupply = 0;
     }
 }

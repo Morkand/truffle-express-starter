@@ -81,6 +81,28 @@ class DryadTokenService{
      * @param {*} account 
      * @param {*} amount  
      */
+    async postMintICOAddress(account,amount){
+
+        let approve;
+
+        try{
+            const dryadtoken = await this.DryadToken.deployed();
+            const accounts = await this.web3.eth.getAccounts();
+            approve = await dryadtoken.mint(account,web3Utils.calcDecimals(amount),{from:accounts[0],gas:this.GAS_LIMIT});
+
+        }catch(err){
+            console.log(err);
+            approve = err;
+        }
+
+        return approve;
+     
+    }
+    /**
+     * Get account approve 
+     * @param {*} account 
+     * @param {*} amount  
+     */
     async getApprove(account,amount){
 
         let approve;

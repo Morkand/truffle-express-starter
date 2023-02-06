@@ -8,6 +8,26 @@ const dryadTokenService = new DryadTokenService();
 
 /**
  * @swagger
+ * /token/ico/mint:
+ *   post:
+ *     description: Add token to contract address
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: ICO mint
+ *         description: Example request {"icoContractAddress":"0x2FaffacFf30Cbc4f8C8D58357018B59F75efeE53","amount":10}
+ *     responses:
+ *       200:
+ *         description: Return transaction hash
+ */
+router.post("/ico/mint", async (req, res) => {
+    const transactionResponse = await dryadTokenService.postMintICOAddress(req.body.icoContractAddress,req.body.amount);
+    res.send(transactionResponse);
+  
+  });
+/**
+ * @swagger
  * /token/approve:
  *   post:
  *     description: Approve spender
